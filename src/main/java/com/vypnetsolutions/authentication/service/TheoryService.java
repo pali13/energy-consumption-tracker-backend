@@ -21,5 +21,4 @@ public class TheoryService {
         return theoryRepository.save(theory);
     }
 
-
 }

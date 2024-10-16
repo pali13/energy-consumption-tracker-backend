@@ -33,6 +33,8 @@ public class TheoryController {
     @CrossOrigin(origins = "http://localhost:8081")
     @PutMapping("/{id}")
     public ResponseEntity<TheoryDTO> saveTheory(@PathVariable Long id, @RequestBody Theory theory) {
+        System.out.println("id: " + id);
+        System.out.println("theory: " + theory);
         Optional<Theory> theoryOptional = theoryService.getTheoryById(id);
         if (theoryOptional.isPresent()) {
             Theory theorySaved = theoryOptional.get();
