@@ -32,26 +32,26 @@ public class TariffController {
     @Autowired
     private UserTariffDetailRepository userTariffDetailRepository;
 
-    @CrossOrigin(origins = "http://localhost:8081")
+    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
     @GetMapping("/{id}")
     public Tariff getTariff(@PathVariable Long id) {
         Optional<Tariff> simpleTariff = tariffService.getTariffById(id);
         return simpleTariff.orElseThrow(() -> new IllegalArgumentException("Tariff not found with id: " + id));
     }
 
-    @CrossOrigin(origins = "http://localhost:8081")
+    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
     @PostMapping
     public Tariff saveTariff(@RequestBody Tariff tariff) {
         return tariffService.saveTariff(tariff);
     }
 
-    @CrossOrigin(origins = "http://localhost:8081")
+    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
     @DeleteMapping("/{id}")
     public void deleteTariff(@PathVariable Long id) {
         tariffService.deleteTariff(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:8081")
+    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
     @GetMapping
     public ResponseTariff getTariffByUser(@PathVariable Long userId) {
         UserTariffDetail userTariffDetail = userTariffDetailRepository.findByUserId(userId)
@@ -66,7 +66,7 @@ public class TariffController {
         return tariff;
     }
 
-    @CrossOrigin(origins = "http://localhost:8081")
+    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
     @PostMapping("/changeTariff")
     public ResponseTariff changeUserTariff(@PathVariable Long userId,
             @RequestBody TariffChangeRequest tariffChangeRequest) {

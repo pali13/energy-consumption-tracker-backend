@@ -66,7 +66,7 @@ public class AuthController {
         @Autowired
         private JwtUtils jwtUtils;
 
-        @CrossOrigin(origins = "http://localhost:8081")
+        @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
         @PostMapping("/signup")
         public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
                 // Verificar si el nombre de usuario ya existe
@@ -128,7 +128,7 @@ public class AuthController {
                 return ResponseEntity.ok("User registered successfully with default tariff!");
         }
 
-        @CrossOrigin(origins = "http://localhost:8081")
+        @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
         @PostMapping("/signin")
         public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
                 Authentication authentication = authenticationManager.authenticate(
@@ -148,7 +148,7 @@ public class AuthController {
                                                 userDetails.getEmail(), roles));
         }
 
-        @CrossOrigin(origins = "http://localhost:8081")
+        @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
         @GetMapping("/{id}")
         public ResponseEntity<?> getUserById(@PathVariable Long id) {
                 User user = userService.findById(id)
