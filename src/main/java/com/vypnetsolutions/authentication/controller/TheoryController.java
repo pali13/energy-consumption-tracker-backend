@@ -23,14 +23,14 @@ public class TheoryController {
     @Autowired
     private TheoryService theoryService;
 
-    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
+    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com")
     @GetMapping("/{id}")
     public ResponseEntity<?> getTheoryById(@PathVariable Long id) {
         Optional<Theory> theory = theoryService.getTheoryById(id);
         return theory.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
+    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com")
     @PutMapping("/{id}")
     public ResponseEntity<TheoryDTO> saveTheory(@PathVariable Long id, @RequestBody Theory theory) {
         System.out.println("id: " + id);

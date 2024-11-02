@@ -31,13 +31,13 @@ public class DailyConsumptionController {
     @Autowired
     private UserService userService;
 
-    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
+    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com")
     @GetMapping("/{date}")
     public ResponseEntity<List<DailyConsumption>> getTodayConsumption(@PathVariable User userId, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return ResponseEntity.ok(dailyConsumptionService.findByDateAndUser(date, userId));
     }
 
-    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
+    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com")
     @PostMapping
     public ResponseEntity<DailyConsumptionDTO> saveConsumption(@PathVariable Long userId, @RequestBody DailyConsumption dailyConsumption) {
         User user = userService.findById(userId)
@@ -56,7 +56,7 @@ public class DailyConsumptionController {
         return ResponseEntity.ok(dailyConsumptionDTO);
     }
 
-    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
+    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com")
     @GetMapping
     public ResponseEntity<List<DailyConsumption>> getConsumptionsBetweenDates(
             @PathVariable Long userId,

@@ -1,7 +1,13 @@
 package com.vypnetsolutions.authentication.tariffdata;
 
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import com.vypnetsolutions.authentication.entity.Tariff;
+import com.vypnetsolutions.authentication.repository.TariffRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -10,8 +16,8 @@ public class TariffDataInitializer implements CommandLineRunner {
     // @Autowired
     // private UserRepository userRepository;
 
-    // @Autowired
-    // private TariffRepository tariffRepository;
+    @Autowired
+    private TariffRepository tariffRepository;
 
     // @Autowired
     // private UserTariffDetailRepository userTariffDetailRepository;
@@ -27,9 +33,9 @@ public class TariffDataInitializer implements CommandLineRunner {
         //     throw new RuntimeException("User not found with id: " + 1);
         // }
 
-        // Optional<Tariff> tariffOptional = tariffRepository.findById(2L);
+        // Optional<Tariff> tariffOptional = tariffRepository.findById(1L);
         // if (!tariffOptional.isPresent()) {
-        //     throw new RuntimeException("Tariff not found with id: " + 2);
+        //     throw new RuntimeException("Tariff not found with id: " +1);
         // }
         // UserTariffDetail userTariffDetail = userTariffDetailRepository.findByUserId(2L)
         //         .orElse(new UserTariffDetail());

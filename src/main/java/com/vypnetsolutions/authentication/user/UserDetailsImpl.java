@@ -2,12 +2,14 @@ package com.vypnetsolutions.authentication.user;
 
 import java.sql.Date;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.vypnetsolutions.authentication.entity.Role;
 import com.vypnetsolutions.authentication.entity.User;
 
 public class UserDetailsImpl implements UserDetails {
@@ -16,6 +18,7 @@ public class UserDetailsImpl implements UserDetails {
     private String email;
     private String password;
     private Date birthDate;
+    private Set<Role> roles;
 
     public UserDetailsImpl(String username, String password) {
         this.username = username;
@@ -28,11 +31,14 @@ public class UserDetailsImpl implements UserDetails {
         this.password = user.getPassword();
         this.email = user.getEmail();
         this.birthDate = user.getBirthDate();
+        this.roles = user.getRoles();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName().name())) // Convertimos ERole a String
+                .collect(Collectors.toList());
     }
 
     public Long getId() {

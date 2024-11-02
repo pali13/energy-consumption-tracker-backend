@@ -21,7 +21,7 @@ public class JwtAuthEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        response.setHeader("Access-Control-Allow-Origin", "https://los-electricos-5toc3.onrender.com:8081");
+        response.setHeader("Access-Control-Allow-Origin", "https://los-electricos-5toc3.onrender.com");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         Map<String, Object> responseBody = new HashMap<>();
         responseBody.put("timestamp", System.currentTimeMillis());

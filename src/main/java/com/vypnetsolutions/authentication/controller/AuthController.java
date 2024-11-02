@@ -38,6 +38,7 @@ import com.vypnetsolutions.authentication.tariffdata.UserTariffDetail;
 import com.vypnetsolutions.authentication.user.UserDetailsImpl;
 import com.vypnetsolutions.authentication.utlis.JwtUtils;
 
+@CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -66,7 +67,7 @@ public class AuthController {
         @Autowired
         private JwtUtils jwtUtils;
 
-        @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
+        @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com")
         @PostMapping("/signup")
         public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
                 // Verificar si el nombre de usuario ya existe
@@ -107,7 +108,7 @@ public class AuthController {
                 User savedUser = userRepository.save(user);
 
                 // Asignar la tarifa básica por defecto
-                Optional<Tariff> tariffOptional = tariffRepository.findById(2L); // Tarifa con ID 2
+                Optional<Tariff> tariffOptional = tariffRepository.findById(1L); // Tarifa con ID 2
                 if (!tariffOptional.isPresent()) {
                         return ResponseEntity
                                         .badRequest()
@@ -128,7 +129,7 @@ public class AuthController {
                 return ResponseEntity.ok("User registered successfully with default tariff!");
         }
 
-        @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
+        @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com")
         @PostMapping("/signin")
         public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
                 Authentication authentication = authenticationManager.authenticate(
@@ -148,7 +149,7 @@ public class AuthController {
                                                 userDetails.getEmail(), roles));
         }
 
-        @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
+        @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com")
         @GetMapping("/{id}")
         public ResponseEntity<?> getUserById(@PathVariable Long id) {
                 User user = userService.findById(id)

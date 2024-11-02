@@ -32,20 +32,20 @@ public class ApplianceController {
     @Autowired
     private UserService userService;
 
-    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
+    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com")
     @GetMapping
     public List<Appliance> getAppliancesByUserId(@PathVariable Long userId) {
         return applianceService.getAllAppliancesByUserId(userId);
     }
 
-    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
+    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com")
     @GetMapping("/{id}")
     public ResponseEntity<Appliance> getApplianceById(@PathVariable Long id) {
         Optional<Appliance> appliance = applianceService.getApplianceById(id);
         return appliance.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
+    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com")
     @PutMapping("/{id}")
     public ResponseEntity<ApplianceDTO> updateAppliance(@PathVariable Long userId, @PathVariable Long id, @RequestBody Appliance appliance) {
         User user = userService.findById(userId)
@@ -69,7 +69,7 @@ public class ApplianceController {
         return ResponseEntity.ok(applianceDTO);
     }
 
-    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
+    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com")
     @PostMapping
     public ResponseEntity<ApplianceDTO> createAppliance(@PathVariable Long userId, @RequestBody Appliance appliance) {
         User user = userService.findById(userId)
@@ -85,7 +85,7 @@ public class ApplianceController {
         return ResponseEntity.ok(applianceDTO);
     }
 
-    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com:8081")
+    @CrossOrigin(origins = "https://los-electricos-5toc3.onrender.com")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAppliance(@PathVariable Long id) {
         applianceService.deleteAppliance(id);

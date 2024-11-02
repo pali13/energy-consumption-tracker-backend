@@ -1,15 +1,14 @@
 package com.vypnetsolutions.authentication.security.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import static org.springframework.security.config.Customizer.withDefaults;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.TimeZone;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -26,17 +25,13 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.vypnetsolutions.authentication.response.JwtAuthEntryPoint;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-
     private final JwtAuthEntryPoint jwtAuthEntryPoint;
-
     public SecurityConfiguration(JwtAuthEntryPoint jwtAuthEntryPoint) {
         this.jwtAuthEntryPoint = jwtAuthEntryPoint;
     }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -45,14 +40,13 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((authz) -> authz.anyRequest().permitAll())
                 .httpBasic(withDefaults())
                 .logout((logout) -> logout.permitAll());
-
         return http.build();
     }
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://los-electricos-5toc3.onrender.com:8081"));
+        configuration.setAllowedOrigins(Arrays.asList("https://los-electricos-5toc3.onrender.com"));
+        configuration.addAllowedOriginPattern("https://los-electricos-5toc3.onrender.com");
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
@@ -60,24 +54,20 @@ public class SecurityConfiguration {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
     @Bean
     public ObjectMapper objectMapper() {
         JavaTimeModule module = new JavaTimeModule();
         module.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(module);
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         mapper.setTimeZone(TimeZone.getTimeZone("America/Montevideo"));
         return mapper;
     }
-
     @SuppressWarnings("removal")
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder,
